@@ -11,13 +11,29 @@
  */
 class ilDICEAdaptationsUIHookGUI extends ilUIHookPluginGUI
 {
-
+    private static $blocks = [
+        'ressources' => [
+            'class' => 'ressources',
+            'ref_id' => '221',
+            'text' => 'Search Ressources'
+        ],
+        'motivational' => [
+            'class' => 'motivation',
+            'ref_id' => '167',
+            'text' => 'Get Motivated'
+        ]
+    ];
     function getHTML($a_comp, $a_part, $a_par = array())
     {
-        if ($a_comp = 'Services/Locator' && $a_part == 'main_locator') {
+        if ($a_comp == 'Services/Locator' && $a_part == 'main_locator') {
             return array(
                 'mode' => ilUIHookPluginGUI::REPLACE,
                 'html' => ''
+            );
+        } else if ($a_comp == 'Services/Container' && $a_part == 'right_column') {
+            return array(
+                'mode' => ilUIHookPluginGUI::PREPEND,
+                'html' => $this->getBlockHTML(self::$blocks)
             );
         }
 
@@ -40,7 +56,7 @@ class ilDICEAdaptationsUIHookGUI extends ilUIHookPluginGUI
                 $classes[] = $call['class'];
             }
 
-            if ($_GET['baseClass'] == 'ilPersonalDesktopGUI' && ((int) $_GET['wsp_id'] != 0) || array_search('ilObjRoleGUI', $classes) !== false || $this->ref_id == 0) {
+            if ($_GET['baseClass'] == 'ilPersonalDesktopGUI' && ((int) $_GET['wsp_id'] != 0) || array_search('ilObjRoleGUI', $classes) !== false || $ref_id == 0) {
                 // We are in the Personal Desktop, in the root note, or in the roleGUI and we do nothing
             } else if ($_GET['baseClass'] == 'ilMailGUI' and ((int) $_GET['mail_id'] != 0) || $_GET['cmd'] == 'mailUser' || $_GET['cmdClass'] == 'ilmailformgui' || $_GET['ref'] == 'mail') {
                 // We are in emails and simply set a fixed back link
@@ -83,7 +99,7 @@ class ilDICEAdaptationsUIHookGUI extends ilUIHookPluginGUI
 
                 if (count($a_par["tabs"]->target) > 0 and in_array($obj_type, $obj_types_with_backlinks)) {
                     // This function only works with a hslu-patch
-                    if (! method_exists($DIC->tabs(), 'hasBackTarget') || ! $this->tabs->hasBackTarget()) {
+                    if (! method_exists($DIC->tabs(), 'hasBackTarget') || ! $DIC->tabs()->hasBackTarget()) {
                         $parentobject = ilObjectFactory::getInstanceByRefId($parent_id);
                         $parent_type = $parentobject->getType();
 
@@ -97,6 +113,28 @@ class ilDICEAdaptationsUIHookGUI extends ilUIHookPluginGUI
                 }
             }
         }
+    }
+    
+    function getBlockHTML($blocks) {
+        global $DIC;
+        $DIC->ui()->mainTemplate()->addCss($this->getPluginObject()->getStyleSheetLocation('diceblocks.css'));
+        $html = '';
+        
+        foreach ($blocks as $block) {
+            $tpl = $this->getPluginObject()->getTemplate("default/tpl.blocks.html");
+            $tpl->setVariable('CLASS', $block['class']);
+            
+            $obj = ilObjectFactory::getInstanceByRefId($block['ref_id']);
+            $type = $obj->getType();
+            $explorer = new ilRepositoryExplorer($block['ref_id']);
+            $link = $explorer->buildLinkTarget($block['ref_id'], $type);    
+            $tpl->setVariable('LINK', $link);
+            
+            $tpl->setVariable('TEXT', $block['text']);
+            $html .= $tpl->get();
+        }
+        
+        return $html;
     }
 }
 ?>

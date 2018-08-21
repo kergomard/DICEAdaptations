@@ -1,0 +1,44 @@
+.block_dice {
+	text-align: center;
+	vertical-align: middle;
+	border-width: 4px;
+	border-style: solid;
+	font-family: MarkerFelt;
+	font-size: 140%;
+	margin-bottom: 20px;
+}
+
+.block_dice a {
+	text-decoration: none;
+	display: block;
+	padding: 1em;
+}
+
+.block_dice a:hover {
+	text-decoration: none;
+}
+
+.block_dice_ressources {
+	border-color: #92278f;	
+}
+
+.block_dice_ressources a, .block_dice_ressources a:hover {
+	color:#92278f;
+}
+
+.block_dice_ressources a:hover {
+	background-color: #e5a0e4;	
+}
+
+.block_dice_motivation {
+	color: #b0bc22;
+}
+
+.block_dice_motivation a, .block_dice_motivation a:hover {
+	color: #b0bc22;
+	
+}
+
+.block_dice_motivation a:hover {
+	background-color:#eef2b8;
+}
