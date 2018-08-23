@@ -25,12 +25,13 @@ class ilDICEAdaptationsUIHookGUI extends ilUIHookPluginGUI
     ];
     function getHTML($a_comp, $a_part, $a_par = array())
     {
+        global $DIC;
         if ($a_comp == 'Services/Locator' && $a_part == 'main_locator') {
             return array(
                 'mode' => ilUIHookPluginGUI::REPLACE,
                 'html' => ''
             );
-        } else if ($a_comp == 'Services/Container' && $a_part == 'right_column') {
+        } else if ($a_comp == 'Services/Container' && $a_part == 'right_column' && !ilObjUser::_isAnonymous($DIC->user()->getId())) {
             return array(
                 'mode' => ilUIHookPluginGUI::PREPEND,
                 'html' => $this->getBlockHTML(self::$blocks)
