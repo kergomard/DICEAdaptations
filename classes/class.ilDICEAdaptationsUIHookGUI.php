@@ -15,12 +15,12 @@ class ilDICEAdaptationsUIHookGUI extends ilUIHookPluginGUI
         'ressources' => [
             'class' => 'ressources',
             'ref_id' => '221',
-            'text' => 'Search Ressources'
+            'text' => 'Search Resources'
         ],
         'motivational' => [
             'class' => 'motivation',
             'ref_id' => '167',
-            'text' => 'Get Motivated'
+            'text' => 'Get Active'
         ]
     ];
     function getHTML($a_comp, $a_part, $a_par = array())
