@@ -95,7 +95,7 @@ class ilDICEAdaptationsUIHookGUI extends ilUIHookPluginGUI
                     'tst',
                     'webr',
                     'wiki',
-                    'xstr'
+                    'xpdl'
                 );
 
                 if (count($a_par["tabs"]->target) > 0 and in_array($obj_type, $obj_types_with_backlinks)) {
