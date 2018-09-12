@@ -18,11 +18,11 @@
 	text-decoration: none;
 }
 
-.block_dice_ressources {
+.block_dice_resources {
 	border-color: #92278f;	
 }
 
-.block_dice_ressources a, .block_dice_ressources a:hover {
+.block_dice_resources a, .block_dice_resources a:hover {
 	color:#92278f;
 }
 

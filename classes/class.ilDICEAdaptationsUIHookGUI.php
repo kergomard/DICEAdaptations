@@ -13,13 +13,13 @@ class ilDICEAdaptationsUIHookGUI extends ilUIHookPluginGUI
 {
     private static $blocks = [
         'ressources' => [
-            'class' => 'ressources',
+            'class' => 'resources',
             'ref_id' => '221',
             'text' => 'Search Resources'
         ],
         'motivational' => [
             'class' => 'motivation',
-            'ref_id' => '167',
+            'ref_id' => '254',
             'text' => 'Get Active'
         ]
     ];
