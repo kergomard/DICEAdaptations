@@ -20,7 +20,7 @@ class ilDICEAdaptationsUIHookGUI extends ilUIHookPluginGUI
         'motivational' => [
             'class' => 'motivation',
             'ref_id' => '254',
-            'text' => 'Get Active'
+            'text' => 'My Action Diary'
         ]
     ];
     function getHTML($a_comp, $a_part, $a_par = array())
